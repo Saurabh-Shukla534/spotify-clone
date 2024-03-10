@@ -1,0 +1,178 @@
+@import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
+
+:root{
+    --main-font-family: "Varela Round", sans-serif;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    font-family: var(--main-font-family);
+    background-color: antiquewhite;
+}
+
+header{
+    background-color: black;
+}
+
+nav ul{
+    display: flex;
+    align-items: center;
+    list-style: none;
+    height: 7vh;
+    color: white;
+}
+
+nav ul li{
+    padding: 0px 12px;
+}
+
+/* nav ul li img{
+    width: 34px;
+} */
+
+.logo{
+    display: flex;
+    align-items: center;
+    font-weight: bolder;
+    font-size: 1.2rem;
+}
+
+.logo img{
+    width: 34px;
+    padding: 0 6px;
+}
+
+nav ul li a{
+    text-decoration: none;
+    color: white;
+    font-size: 0.93rem;
+}
+
+.container{
+    height: 68vh;
+    background-color: #8c50c4;
+    color: white;
+    margin: 15px auto;
+    padding: 20px;
+    width: 70%;
+    border-radius: 12px;
+    background-image: url(/spotify/assets/darkRider.jpg);
+    background-size: cover;
+    background-blend-mode: luminosity;
+}
+
+.bottom{
+    display: flex;
+    height: 16vh;
+    background-color: black;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#progress{
+    width: 80vw;
+    cursor: pointer;
+    accent-color: #1ED760;
+}
+
+.icons{
+    margin: 1.3vh 0 0;
+}
+
+.icons i{
+    color: white;
+    padding: 0 5px;
+    cursor: pointer;
+}
+
+.songRow{
+    margin: 30px 4px;
+}
+
+.songItem{
+    display: flex;
+    background-color: white;
+    color: black;
+    width: 42%;
+    height: 30px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 13px;
+    border-radius: 17px;
+    font-size: 15px;
+    margin: 10px 0
+}
+
+.labelImage img{
+    width: 26px;
+    border-radius: 14px;
+}
+
+.songIcon{
+    cursor: pointer;
+    margin-left: 0.3vw;
+}
+
+.songInfo{
+    color: white;
+    position: absolute;
+    left: 10vw;
+    display: flex;
+    align-items: center;
+}
+
+.songInfo img{
+    width: 50px;
+    opacity: 0;
+    transition: opacity 0.4s ease-in;
+}
+
+.duration{
+    color: white;
+    position: absolute;
+    right: 10vw;
+    display: flex;
+    align-items: center;
+}
+
+.labelImage {
+    display: flex;
+    align-items: center;
+    width: 25px;
+    border-radius: 14px;
+    max-height: 25px;
+    overflow: hidden;
+}
+
+.songItemGif{
+    display: flex;
+    align-items: center;
+}
+
+.songItemGif img{
+    width: 31px;
+    mix-blend-mode: difference;
+    transition: opacity 0.4s ease-in;
+    opacity: 0;
+}
+
+#tooltip{
+    display: none;
+}
+
+#progress:hover + p {
+    color: white;
+    display: block;
+    position: absolute;
+    bottom: 12vh;
+}
+
+.itemsContainer {
+    display: flex;
+    align-items: center;
+}

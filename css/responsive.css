@@ -1,0 +1,68 @@
+@media screen and (max-width: 1000px) {
+    .songItem {
+        width: 46%;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .songItem {
+        width: 58%;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .songItem {
+        width: 78%;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .songItem {
+        width: 92%;
+        font-size: 13px;
+    }
+
+    .labelImage {
+        width: 20px;
+        max-height: 20px;
+    }
+
+    .songIcon{
+        margin-left: 0.5vw;
+    }
+
+    h2{
+        font-size: 20.8px;
+    }
+
+    .songInfo img{
+        width: 34px;
+    }
+
+    .songInfo span {
+        font-size: 12px;
+    }
+    
+    .duration {
+        font-size: 12px;
+    }
+
+    .container{
+        background-position-x: -50vw;
+        background-blend-mode: luminosity;
+    }
+}
+
+@media screen and (max-width: 350px) {
+    .songInfo img{
+        width: 30px;
+    }
+    
+    .songInfo span {
+        font-size: 11px;
+    }
+
+    #progress:hover + p {
+        font-size: 11px;
+    }
+}
