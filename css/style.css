@@ -60,7 +60,7 @@ nav ul li a{
     padding: 20px;
     width: 70%;
     border-radius: 12px;
-    background-image: url(/spotify/assets/darkRider.jpg);
+    background-image: url(../assets/darkRider.jpg);
     background-size: cover;
     background-blend-mode: luminosity;
 }
