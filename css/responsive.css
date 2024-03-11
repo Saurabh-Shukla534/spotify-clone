@@ -4,15 +4,33 @@
     }
 }
 
+@media screen and (max-width: 900px) {
+    #volumeBar {
+        display: none;
+        transform: rotate(-90deg);
+        position: absolute;
+        right: 4.5vw;
+        bottom: 12vh;
+    }
+}
+
 @media screen and (max-width: 800px) {
     .songItem {
         width: 58%;
+    }
+
+    #volumeBar {
+        right: 5.5vw;
     }
 }
 
 @media screen and (max-width: 600px) {
     .songItem {
         width: 78%;
+    }
+
+    #volumeBar {
+        right: 7.5vw;
     }
 }
 
@@ -50,6 +68,10 @@
     .container{
         background-position-x: -50vw;
         background-blend-mode: luminosity;
+    }
+
+    #volumeBar {
+        right: 4vw;
     }
 }
 

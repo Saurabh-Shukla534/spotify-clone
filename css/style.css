@@ -176,3 +176,16 @@ nav ul li a{
     display: flex;
     align-items: center;
 }
+
+.volumeButtons i{
+    color: white;
+    padding: 0 5px;
+    cursor: pointer;
+    margin-right: 0.5vw;
+}
+
+#volumeBar {
+    margin-right: 1vw;
+    cursor: pointer;
+    accent-color: #1ED760;
+}

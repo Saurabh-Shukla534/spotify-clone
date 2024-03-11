@@ -6,18 +6,27 @@ let playGif = document.getElementById('playGif');
 let currentSongName = document.getElementById('currentSongName');
 songItems = Array.from(document.getElementsByClassName('songItem'));
 let gif = document.getElementById('itemGif');
+let volumeBar = document.getElementById('volumeBar');
+let volumeOff = document.getElementById('volumeOff');
+let volumeLow = document.getElementById('volumeLow');
+let volumeHigh = document.getElementById('volumeHigh');
+audioElement.volume = 0.8;
+volumeHigh.style.display = 'block';
+volumeLow.style.display = 'none';
+volumeOff.style.display = 'none';
+let volumeCopy = audioElement.volume;
 
 songsArray = [
-    {songName: "Cheap Thrills", filePath: "songs/1.mp3", coverPath: "covers/1.png"},
-    {songName: "Bijuria", filePath: "songs/2.mp3", coverPath: "covers/2.jpg"},
+    {songName: "Bijuria", filePath: "songs/1.mp3", coverPath: "covers/1.jpg"},
+    {songName: "Cheap Thrills", filePath: "songs/2.mp3", coverPath: "covers/2.png"},
     {songName: "Chhaiya Chhaiya", filePath: "songs/3.mp3", coverPath: "covers/3.jpg"},
     {songName: "Hum Hai Naye", filePath: "songs/4.mp3", coverPath: "covers/4.jpg"},
     {songName: "Khalbali", filePath: "songs/5.mp3", coverPath: "covers/5.jpg"},
     {songName: "Khalibali", filePath: "songs/6.mp3", coverPath: "covers/6.jpg"},
     {songName: "Make Some Noise", filePath: "songs/7.mp3", coverPath: "covers/7.jpg"},
     {songName: "Patakha Guddi", filePath: "songs/8.mp3", coverPath: "covers/8.jpg"},
-    {songName: "Yeh Dil Deewana", filePath: "songs/9.mp3", coverPath: "covers/9.jpg"},
-    {songName: "Tere Naina", filePath: "songs/10.mp3", coverPath: "covers/10.jpg"},
+    {songName: "Tere Naina", filePath: "songs/9.mp3", coverPath: "covers/9.jpg"},
+    {songName: "Yeh Dil Deewana", filePath: "songs/10.mp3", coverPath: "covers/10.jpg"},
 ];
 
 songItems.forEach((element, i) => {
@@ -42,7 +51,7 @@ currentItem.addEventListener('click', () => {
         playGif.style.opacity = 1;
         Array.from(document.getElementsByClassName('songIcon'))[songIndex].classList.remove('fa-circle-play');
         Array.from(document.getElementsByClassName('songIcon'))[songIndex].classList.add('fa-circle-pause');
-        document.getElementById('itemGif' + `${songIndex}`).style.opacity = 1;    
+        document.getElementById('itemGif' + `${songIndex}`).style.opacity = 1;   
     } else {
         makeAllIconPlay();
         audioElement.pause();
@@ -53,6 +62,7 @@ currentItem.addEventListener('click', () => {
     }
 })
 
+// Update audio progress bar
 audioElement.addEventListener('timeupdate', () => {
     myProgress = (audioElement.currentTime/audioElement.duration) * 100;
     progress.value = myProgress;
@@ -67,11 +77,13 @@ audioElement.addEventListener('timeupdate', () => {
     document.getElementById('currentDuration').innerText = str_pad_left(parseInt(audioElement.currentTime/60), '0', 2) + ':' + str_pad_left(parseInt(audioElement.currentTime%60), '0', 2);
 })
 
+// Slide over progress bar
 progress.addEventListener('input', (event) => {
     currTime = event.target.value * audioElement.duration / 100;
     audioElement.currentTime = currTime;
 })
 
+// Make all items icon play
 const makeAllIconPlay = () => {
     Array.from(document.getElementsByClassName('songIcon')).forEach((element) => {
         element.classList.remove('fa-circle-pause');
@@ -117,6 +129,7 @@ Array.from(document.getElementsByClassName('songIcon')).forEach((element) => {
     })
 })
 
+// Play next item
 document.getElementById('nextItem').addEventListener('click', () => {
     if(songIndex >= 9) {
         songIndex = 0;
@@ -138,6 +151,7 @@ document.getElementById('nextItem').addEventListener('click', () => {
     document.getElementById('itemGif' + `${songIndex}`).style.opacity = 1;
 })
 
+// Play previous item
 document.getElementById('previousItem').addEventListener('click', () => {
     if(songIndex <= 0) {
         songIndex = 9;
@@ -166,6 +180,7 @@ function getDuration(audioPath, callBack) {
     })
 }
 
+// Get duration of each item
 Promise.all(songsArray.map(song => new Promise(resolve => {
     getDuration(song.filePath, duration => {
       song.duration = duration;
@@ -183,6 +198,7 @@ function str_pad_left(string, pad, length) {
     return (new Array(length + 1).join(pad) + string).slice(-length);
 }
 
+// Duration tooltip on mouse hover
 progress.addEventListener('mousemove', (event) => {
     let w = progress.clientWidth;
     let x = event.offsetX;
@@ -217,6 +233,7 @@ window.ontouchmove = function (e) {
     tooltip.style.left = x;
 }
 
+// Resizing icons & volume bar 
 window.addEventListener('resize', (event) => {
     let icons = Array.from(document.getElementsByClassName('icons')[0].children);
     if(event.target.outerWidth <= 500) {
@@ -228,6 +245,80 @@ window.addEventListener('resize', (event) => {
             element.classList.add('fa-2x');
         })
     }
+
+    if(event.target.outerWidth <= 900) {
+        volumeBar.style.display = 'none'
+    }
+    else if(event.target.outerWidth > 900) {
+        volumeBar.style.display = 'block';
+    }
 })
 
+// Volume icons show/hide
+volumeBar.addEventListener('input', (event) => {
+    const currVolume = event.target.value;
+    audioElement.volume = currVolume/100;
+    volumeCopy = audioElement.volume;
+    if(currVolume >= 50) {
+        volumeHigh.style.display = 'block';
+        volumeLow.style.display = 'none';
+        volumeOff.style.display = 'none';
+    } else if(currVolume >= 1 && currVolume < 50) {
+        volumeHigh.style.display = 'none';
+        volumeLow.style.display = 'block';
+        volumeOff.style.display = 'none';
+    } else if(currVolume <= 0) {
+        volumeHigh.style.display = 'none';
+        volumeLow.style.display = 'none';
+        volumeOff.style.display = 'block';
+    }
+})
 
+// Toggle volume icons 
+volumeHigh.addEventListener('click', () => {
+    if(volumeHigh.style.display == 'block' && window.outerWidth > 900) {
+        volumeHigh.style.display = 'none';
+        volumeOff.style.display = 'block';
+        audioElement.volume = 0;
+    }
+})
+
+volumeLow.addEventListener('click', () => {
+    if(volumeLow.style.display == 'block' && window.outerWidth > 900) {
+        volumeLow.style.display = 'none';
+        volumeOff.style.display = 'block';
+        audioElement.volume = 0;
+    }
+})
+
+volumeOff.addEventListener('click', () => {
+    if(window.outerWidth > 900) {
+        if(volumeCopy >= 0.5) {
+            volumeOff.style.display = 'none';
+            volumeHigh.style.display = 'block';
+            audioElement.volume = volumeCopy;
+        } else if(volumeCopy >= 0.01 && volumeCopy < 0.5) {
+            volumeOff.style.display = 'none';
+            volumeLow.style.display = 'block';
+            audioElement.volume = volumeCopy;
+        }
+    }
+})
+
+// show/hide volume bar
+volButtons.addEventListener('click', () => {
+    if(volumeBar.style.display == 'none' || volumeBar.style.display == '') {
+        volumeBar.style.display = 'block'
+        volumeBar.addEventListener('touchend', () => {
+            if(window.outerWidth <= 900) {
+                setTimeout(() => {
+                    volumeBar.style.display = 'none'
+                }, 1000);
+            } else {
+                volumeBar.style.display = 'block';
+            }
+        })
+    } else if(volumeBar.style.display == 'block') {
+        volumeBar.style.display = 'none'
+    }
+})
