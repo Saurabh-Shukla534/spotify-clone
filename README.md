@@ -12,12 +12,12 @@ This is a Spotify clone app built using HTML, CSS, and JavaScript. It aims to re
 
 ## Features
 
-* Play/Pause: It allows the user to play or pause the currently selected track in the playlist.
-* Next/Previous: It enables the user to skip to the next or previous track in the playlist.
-* Seek: It allows the user to manually move forward or backward within a track by dragging a slider or clicking on a progress bar.
-* Duration: It provides users with information about both the current duration and the total duration of the currently selected track. When the user hovers over the progress bar, it displays the duration of the track, allowing the user to jump to specific points within the track.
-* Volume: It permits the user to adjust the volume for the track, either increasing or decreasing it.
-* Display the currently playing track and album artwork.
+* **Play/Pause**: It allows the user to play or pause the currently selected track in the playlist.
+* **Next/Previous**: It enables the user to skip to the next or previous track in the playlist.
+* **Seek**: It allows the user to manually move forward or backward within a track by dragging a slider or clicking on a progress bar.
+* **Duration**: It provides users with information about both the current duration and the total duration of the currently selected track. When the user hovers over the progress bar, it displays the duration of the track, allowing the user to jump to specific points within the track.
+* **Volume**: It permits the user to adjust the volume for the track, either increasing or decreasing it.
+* Display the currently playing track.
 
 ## Live Demo
 [Spotify-Clone](https://saurabh-shukla534.github.io/spotify-clone/)
