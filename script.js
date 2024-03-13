@@ -15,6 +15,10 @@ volumeHigh.style.display = 'block';
 volumeLow.style.display = 'none';
 volumeOff.style.display = 'none';
 let volumeCopy = audioElement.volume;
+let shuffleList = document.getElementById('shuffleList');
+let repeatItem = document.getElementById('repeatItem');
+let shuffleOn = false;
+let repeatOn = false;
 
 songsArray = [
     {songName: "Bijuria", filePath: "songs/1.mp3", coverPath: "covers/1.jpg"},
@@ -67,6 +71,12 @@ audioElement.addEventListener('timeupdate', () => {
     myProgress = (audioElement.currentTime/audioElement.duration) * 100;
     progress.value = myProgress;
     if(progress.value >= 100) {
+        if(shuffleOn) {
+            songIndex = getRandomNumber();
+        }
+        if(repeatOn) {
+            songIndex = songIndex - 1;
+        }
         makeAllIconPlay();
         currentItem.classList.remove('fa-circle-pause');
         currentItem.classList.add('fa-circle-play');
@@ -135,6 +145,9 @@ document.getElementById('nextItem').addEventListener('click', () => {
         songIndex = 0;
     } else {
         songIndex += 1;
+    }
+    if(shuffleOn) {
+        songIndex = getRandomNumber();
     }
     makeAllIconPlay();
     audioElement.src = `./songs/${songIndex + 1}.mp3`;
@@ -236,7 +249,7 @@ window.ontouchmove = function (e) {
 // Resizing icons & volume bar 
 window.addEventListener('resize', (event) => {
     let icons = Array.from(document.getElementsByClassName('icons')[0].children);
-    if(event.target.outerWidth <= 500) {
+    if(event.target.outerWidth <= 550) {
         icons.forEach((element) => {
             element.classList.remove('fa-2x');
         })
@@ -318,7 +331,34 @@ volButtons.addEventListener('click', () => {
                 volumeBar.style.display = 'block';
             }
         })
-    } else if(volumeBar.style.display == 'block') {
-        volumeBar.style.display = 'none'
+    }
+})
+
+shuffleList.addEventListener('click', () => {
+    if(Array.from(shuffleList.classList).includes('element__disable')) {
+        shuffleList.classList.remove('element__disable');
+        shuffleOn = true;
+    } else {
+        shuffleList.classList.add('element__disable');
+        shuffleOn = false;
+    }
+})
+
+
+function getRandomNumber() {
+    const index = Math.floor(Math.random() * 10);
+    if(index == songIndex || (index + 1 == songIndex)){
+        return getRandomNumber();
+    }
+    return index;
+}
+
+repeatItem.addEventListener('click', () => {
+    if(Array.from(repeatItem.classList).includes('element__disable')) {
+        repeatItem.classList.remove('element__disable');
+        repeatOn = true;
+    } else {
+        repeatItem.classList.add('element__disable');
+        repeatOn = false;
     }
 })

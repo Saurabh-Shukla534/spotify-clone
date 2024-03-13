@@ -34,7 +34,7 @@
     }
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 550px) {
     .songItem {
         width: 92%;
         font-size: 13px;

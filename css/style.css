@@ -189,3 +189,7 @@ nav ul li a{
     cursor: pointer;
     accent-color: #1ED760;
 }
+
+.element__disable{
+    opacity: 0.5;
+}
