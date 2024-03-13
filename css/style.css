@@ -191,5 +191,6 @@ nav ul li a{
 }
 
 .element__disable{
+    cursor: pointer;
     opacity: 0.5;
 }
