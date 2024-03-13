@@ -73,6 +73,10 @@
     #volumeBar {
         right: 4vw;
     }
+
+    .icons i{
+        padding: 0 2px;
+    }
 }
 
 @media screen and (max-width: 350px) {
